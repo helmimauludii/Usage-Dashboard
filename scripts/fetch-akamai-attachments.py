@@ -137,10 +137,12 @@ def main() -> int:
             if {"summary", "daily", "cp-code"}.issubset(downloaded):
                 break
 
-    missing = {"summary", "daily", "cp-code"} - set(downloaded)
+    missing = {"summary", "daily"} - set(downloaded)
     if missing:
         print(f"Missing required Akamai attachment(s): {', '.join(sorted(missing))}", file=sys.stderr)
         return 1
+    if "cp-code" not in downloaded:
+        print("Optional Akamai CP Code attachment was not found; keeping existing dashboard CP Code data.", file=sys.stderr)
 
     github_output = os.environ.get("GITHUB_OUTPUT")
     lines = [f"{key}={path}" for key, path in sorted(downloaded.items())]
