@@ -85,8 +85,8 @@ function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
       pacePct,
       dailyAllowanceGb,
       tone: "danger",
-      status: "Perlu follow-up bulan ini",
-      guidance: "Proyeksi akhir bulan sudah melewati jatah rata-rata bulanan. Pertimbangkan optimasi traffic atau penyesuaian policy sebelum akhir bulan.",
+      status: "Follow-up needed this month",
+      guidance: "The month-end projection is above the average monthly entitlement. Review traffic drivers or policy adjustments before month-end.",
     };
   }
 
@@ -104,8 +104,8 @@ function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
       pacePct,
       dailyAllowanceGb,
       tone: "warn",
-      status: "Pantau ketat",
-      guidance: "Pemakaian bulan berjalan lebih cepat dari ritme ideal. Review CP Code terbesar dan perubahan traffic beberapa hari terakhir.",
+      status: "Monitor closely",
+      guidance: "Current-month usage is running faster than the ideal pace. Review the largest CP Codes and recent traffic changes.",
     };
   }
 
@@ -122,8 +122,8 @@ function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
     pacePct,
     dailyAllowanceGb,
     tone: "good",
-    status: "Dalam ritme aman",
-    guidance: "Pemakaian bulan berjalan masih dalam ritme yang terkendali terhadap jatah rata-rata bulanan.",
+    status: "On a controlled pace",
+    guidance: "Current-month usage is tracking within a controlled range against the average monthly entitlement.",
   };
 }
 
@@ -390,7 +390,7 @@ export default function App() {
               <div className="pipeline-card">
                 <CalendarClock size={18} />
                 <div>
-                  <strong>Latest daily usage snapshot</strong>
+                  <strong>Daily report total</strong>
                   <span>{dailyTotalGb > 0 ? `${asOfDate} · ${formatGb(dailyTotalGb)} across ${dashboardData.dailyUsage.length} rows` : "No daily usage rows available."}</span>
                 </div>
               </div>
