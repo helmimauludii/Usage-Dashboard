@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prepare-sites-dist.mjs",
     "data:komdigi": "node scripts/generate-dashboard-data.mjs",
     "fetch:akamai": "python3 scripts/fetch-akamai-attachments.py",
     "preview": "vite preview"
