@@ -39,11 +39,92 @@ function latestAsOf(rows, dataAsOfDate) {
   return latest || new Date().toISOString().slice(0, 10);
 }
 
-function latestDailyUsage(dailyRows) {
-  return [...dailyRows]
+function dailyReportTotalGb(dailyRows) {
+  return dailyRows
     .filter((row) => row.statisticType === "Bytes" && row.uom === "GB")
-    .sort((a, b) => a.usageDate.localeCompare(b.usageDate))
-    .at(-1);
+    .reduce((sum, row) => sum + Number(row.value || 0), 0);
+}
+
+function monthWindow(asOfDate) {
+  const date = new Date(`${asOfDate}T00:00:00`);
+  if (Number.isNaN(date.getTime())) {
+    return { dayOfMonth: 1, daysInMonth: 30, daysRemaining: 29 };
+  }
+
+  const dayOfMonth = date.getDate();
+  const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  return {
+    dayOfMonth,
+    daysInMonth,
+    daysRemaining: Math.max(0, daysInMonth - dayOfMonth),
+  };
+}
+
+function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
+  const { dayOfMonth, daysInMonth, daysRemaining } = monthWindow(asOfDate);
+  const expectedUsageGb = (monthlyQuotaGb / daysInMonth) * dayOfMonth;
+  const projectedUsageGb = dayOfMonth > 0 ? (currentUsageGb / dayOfMonth) * daysInMonth : currentUsageGb;
+  const dailyAverageGb = dayOfMonth > 0 ? currentUsageGb / dayOfMonth : 0;
+  const remainingMonthlyGb = monthlyQuotaGb - currentUsageGb;
+  const usageVsMonthlyPct = monthlyQuotaGb > 0 ? (currentUsageGb / monthlyQuotaGb) * 100 : 0;
+  const projectedVsMonthlyPct = monthlyQuotaGb > 0 ? (projectedUsageGb / monthlyQuotaGb) * 100 : 0;
+  const pacePct = expectedUsageGb > 0 ? (currentUsageGb / expectedUsageGb) * 100 : 0;
+  const dailyAllowanceGb = daysRemaining > 0 ? Math.max(0, remainingMonthlyGb) / daysRemaining : 0;
+
+  if (projectedVsMonthlyPct >= 100 || remainingMonthlyGb < 0) {
+    return {
+      dayOfMonth,
+      daysInMonth,
+      daysRemaining,
+      expectedUsageGb,
+      projectedUsageGb,
+      dailyAverageGb,
+      remainingMonthlyGb,
+      usageVsMonthlyPct,
+      projectedVsMonthlyPct,
+      pacePct,
+      dailyAllowanceGb,
+      tone: "danger",
+      status: "Perlu follow-up bulan ini",
+      guidance: "Proyeksi akhir bulan sudah melewati jatah rata-rata bulanan. Pertimbangkan optimasi traffic atau penyesuaian policy sebelum akhir bulan.",
+    };
+  }
+
+  if (projectedVsMonthlyPct >= 85 || pacePct >= 110) {
+    return {
+      dayOfMonth,
+      daysInMonth,
+      daysRemaining,
+      expectedUsageGb,
+      projectedUsageGb,
+      dailyAverageGb,
+      remainingMonthlyGb,
+      usageVsMonthlyPct,
+      projectedVsMonthlyPct,
+      pacePct,
+      dailyAllowanceGb,
+      tone: "warn",
+      status: "Pantau ketat",
+      guidance: "Pemakaian bulan berjalan lebih cepat dari ritme ideal. Review CP Code terbesar dan perubahan traffic beberapa hari terakhir.",
+    };
+  }
+
+  return {
+    dayOfMonth,
+    daysInMonth,
+    daysRemaining,
+    expectedUsageGb,
+    projectedUsageGb,
+    dailyAverageGb,
+    remainingMonthlyGb,
+    usageVsMonthlyPct,
+    projectedVsMonthlyPct,
+    pacePct,
+    dailyAllowanceGb,
+    tone: "good",
+    status: "Dalam ritme aman",
+    guidance: "Pemakaian bulan berjalan masih dalam ritme yang terkendali terhadap jatah rata-rata bulanan.",
+  };
 }
 
 export default function App() {
@@ -95,10 +176,15 @@ export default function App() {
     [dashboardData.customer, sortedSummaryRows, asOfDate],
   );
   const topCpCode = sortedCpCodeRows.at(0) || null;
-  const latestDaily = latestDailyUsage(dashboardData.dailyUsage);
+  const dailyTotalGb = dailyReportTotalGb(dashboardData.dailyUsage);
   const progressWidth = `${Math.min(100, Math.max(0, quota.quotaUtilizationPct))}%`;
   const remainingTone = quota.remainingQuotaGb < 0 ? "metric-danger" : "metric-good";
   const sourceDescription = dashboardData.sourceFiles.length > 0 ? dashboardData.sourceFiles.join(", ") : "No source file metadata";
+  const currentMonthUsageGb = quota.currentMonth?.usageGb || 0;
+  const monthlySignal = monthlyControlSignal(currentMonthUsageGb, quota.monthlyQuotaGb, asOfDate);
+  const monthlyProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.usageVsMonthlyPct))}%`;
+  const projectedProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.projectedVsMonthlyPct))}%`;
+  const monthlyToneClass = `metric-${monthlySignal.tone}`;
 
   return (
     <main className="app-shell">
@@ -139,29 +225,58 @@ export default function App() {
         <div className="main-column">
           {activeTab === "overview" && (
             <>
-              <section className="kpi-grid">
-                <KpiCard label="YTD Usage" value={formatGb(quota.ytdUsageGb)} subtext="Calculated from monthly Summary data, including one-time YTD backfill and daily updates." />
-                <KpiCard label="Annual Quota" value={formatTb(dashboardData.customer.annualQuotaTb)} subtext={`${numberFmt.format(quota.annualQuotaGb)} GB at ${dashboardData.customer.tbToGbFactor} GB per TB.`} />
-                <KpiCard label="Quota Utilization" value={`${numberFmt.format(quota.quotaUtilizationPct)}%`} tone={percentClass(quota.quotaUtilizationPct)} subtext={`Remaining quota: ${formatGb(quota.remainingQuotaGb)}.`} />
-                <KpiCard label="Current Month" value={quota.currentMonth ? formatGb(quota.currentMonth.usageGb) : "-"} subtext={quota.currentMonth ? `${formatMonth(quota.currentMonth.reportMonth)} · ${quota.currentMonth.dataStatus}` : "No summary rows available."} />
-                <KpiCard label="Pro-rata YTD Quota" value={formatGb(quota.prorataQuotaGb)} tone={percentClass(quota.prorataUtilizationPct)} subtext={`Usage is ${numberFmt.format(quota.prorataUtilizationPct)}% of pro-rata quota.`} />
-                <KpiCard label="Top CP Code" value={topCpCode ? topCpCode.cpCode : "-"} subtext={topCpCode ? `${topCpCode.cpName} · ${formatGb(topCpCode.usageGb)}` : "No CP Code data available."} />
+              <section className={`monthly-hero monthly-${monthlySignal.tone}`}>
+                <div className="monthly-primary">
+                  <div className="label">Current Month Control</div>
+                  <h2>{quota.currentMonth ? formatMonth(quota.currentMonth.reportMonth) : "Current month"}</h2>
+                  <div className="hero-metric">{formatGb(currentMonthUsageGb)}</div>
+                  <p>
+                    Day {monthlySignal.dayOfMonth} of {monthlySignal.daysInMonth} · {numberFmt.format(monthlySignal.usageVsMonthlyPct)}% of monthly entitlement used
+                  </p>
+                </div>
+                <div className="monthly-signal-card">
+                  <span className={`signal-pill signal-${monthlySignal.tone}`}>{monthlySignal.status}</span>
+                  <strong>{numberFmt.format(monthlySignal.projectedVsMonthlyPct)}% projected</strong>
+                  <p>{monthlySignal.guidance}</p>
+                </div>
               </section>
 
-              <section className="panel">
+              <section className="monthly-summary-grid">
+                <KpiCard label="Monthly Entitlement" value={formatGb(quota.monthlyQuotaGb)} subtext="Average monthly allowance derived from the annual 46 TB quota." />
+                <KpiCard label="Projected Month End" value={formatGb(monthlySignal.projectedUsageGb)} tone={monthlyToneClass} subtext={`Current daily average: ${formatGb(monthlySignal.dailyAverageGb)} per day.`} />
+                <KpiCard label="Remaining This Month" value={formatGb(monthlySignal.remainingMonthlyGb)} tone={monthlySignal.remainingMonthlyGb < 0 ? "metric-danger" : ""} subtext={`${monthlySignal.daysRemaining} days left · ${formatGb(monthlySignal.dailyAllowanceGb)} daily headroom.`} />
+                <KpiCard label="Usage Pace" value={`${numberFmt.format(monthlySignal.pacePct)}%`} tone={monthlyToneClass} subtext={`Expected by today: ${formatGb(monthlySignal.expectedUsageGb)}.`} />
+                <KpiCard label="Top CP Code" value={topCpCode ? topCpCode.cpCode : "-"} subtext={topCpCode ? `${topCpCode.cpName} · ${formatGb(topCpCode.usageGb)}` : "No CP Code data available."} />
+                <KpiCard label="Daily Report Total" value={dailyTotalGb > 0 ? formatGb(dailyTotalGb) : "-"} subtext={`${dashboardData.dailyUsage.length} daily usage rows · Generated ${asOfDate}.`} />
+              </section>
+
+              <section className="panel monthly-progress-panel">
                 <div className="panel-header">
                   <div>
-                    <div className="label">Quota Progress</div>
-                    <h2>Annual quota utilization</h2>
+                    <div className="label">Monthly Progress</div>
+                    <h2>Usage against controllable monthly entitlement</h2>
                   </div>
-                  <strong className={remainingTone}>{formatGb(quota.remainingQuotaGb)} remaining</strong>
+                  <strong className={monthlyToneClass}>{formatGb(monthlySignal.remainingMonthlyGb)} remaining</strong>
                 </div>
-                <div className="progress-track">
-                  <div className="progress-fill" style={{ width: progressWidth }} />
-                </div>
-                <div className="progress-meta">
-                  <span>YTD usage {formatGb(quota.ytdUsageGb)}</span>
-                  <span>Monthly entitlement {formatGb(quota.monthlyQuotaGb)}</span>
+                <div className="stacked-progress">
+                  <div>
+                    <div className="progress-line-label">
+                      <span>Actual usage</span>
+                      <strong>{numberFmt.format(monthlySignal.usageVsMonthlyPct)}%</strong>
+                    </div>
+                    <div className="progress-track">
+                      <div className="progress-fill monthly-actual-fill" style={{ width: monthlyProgressWidth }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="progress-line-label">
+                      <span>Projected month end</span>
+                      <strong className={monthlyToneClass}>{numberFmt.format(monthlySignal.projectedVsMonthlyPct)}%</strong>
+                    </div>
+                    <div className="progress-track">
+                      <div className={`progress-fill monthly-projected-fill fill-${monthlySignal.tone}`} style={{ width: projectedProgressWidth }} />
+                    </div>
+                  </div>
                 </div>
               </section>
 
@@ -173,6 +288,40 @@ export default function App() {
                   </div>
                 </div>
                 <MonthlyUsageChart rows={sortedSummaryRows} monthlyQuotaGb={quota.monthlyQuotaGb} />
+              </section>
+
+              <section className="panel">
+                <div className="panel-header">
+                  <div>
+                    <div className="label">Annual Context</div>
+                    <h2>Quota utilization for year-to-date visibility</h2>
+                  </div>
+                  <strong className={remainingTone}>{formatGb(quota.remainingQuotaGb)} remaining</strong>
+                </div>
+                <div className="annual-context-grid">
+                  <div className="annual-stat">
+                    <span>YTD Usage</span>
+                    <strong>{formatGb(quota.ytdUsageGb)}</strong>
+                    <small>Monthly Summary plus daily updates</small>
+                  </div>
+                  <div className="annual-stat">
+                    <span>Annual Quota</span>
+                    <strong>{formatTb(dashboardData.customer.annualQuotaTb)}</strong>
+                    <small>{numberFmt.format(quota.annualQuotaGb)} GB at {dashboardData.customer.tbToGbFactor} GB per TB</small>
+                  </div>
+                  <div className="annual-stat">
+                    <span>Annual Utilization</span>
+                    <strong className={percentClass(quota.quotaUtilizationPct)}>{numberFmt.format(quota.quotaUtilizationPct)}%</strong>
+                    <small>{numberFmt.format(quota.prorataUtilizationPct)}% of elapsed quota</small>
+                  </div>
+                </div>
+                <div className="progress-track annual-progress-track">
+                  <div className="progress-fill" style={{ width: progressWidth }} />
+                </div>
+                <div className="progress-meta">
+                  <span>YTD usage {formatGb(quota.ytdUsageGb)}</span>
+                  <span>Annual quota {formatGb(quota.annualQuotaGb)}</span>
+                </div>
               </section>
 
               <section className="panel">
@@ -242,7 +391,7 @@ export default function App() {
                 <CalendarClock size={18} />
                 <div>
                   <strong>Latest daily usage snapshot</strong>
-                  <span>{latestDaily ? `${latestDaily.usageDate} · ${formatGb(latestDaily.value)}` : "No daily usage snapshot available."}</span>
+                  <span>{dailyTotalGb > 0 ? `${asOfDate} · ${formatGb(dailyTotalGb)} across ${dashboardData.dailyUsage.length} rows` : "No daily usage rows available."}</span>
                 </div>
               </div>
               <div className="source-list">

@@ -178,6 +178,100 @@ label,
   gap: 14px;
 }
 
+.monthly-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.85fr);
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.monthly-good {
+  border-top: 5px solid var(--good);
+}
+
+.monthly-warn {
+  border-top: 5px solid var(--warn);
+}
+
+.monthly-danger {
+  border-top: 5px solid var(--danger);
+}
+
+.monthly-primary h2 {
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+.hero-metric {
+  margin-top: 12px;
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.monthly-primary p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.monthly-signal-card {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--surface-soft);
+}
+
+.monthly-signal-card strong {
+  margin-top: 14px;
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.monthly-signal-card p {
+  margin-top: 10px;
+  color: #475467;
+  line-height: 1.45;
+}
+
+.signal-pill {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.signal-good {
+  color: var(--good);
+  background: rgba(22, 128, 60, 0.1);
+}
+
+.signal-warn {
+  color: var(--warn);
+  background: rgba(194, 106, 0, 0.12);
+}
+
+.signal-danger {
+  color: var(--danger);
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.monthly-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .kpi-card,
 .panel {
   border-radius: 8px;
@@ -237,6 +331,86 @@ label,
   margin-top: 10px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.monthly-progress-panel .progress-track {
+  height: 16px;
+}
+
+.stacked-progress {
+  display: grid;
+  gap: 16px;
+}
+
+.progress-line-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.progress-line-label strong {
+  color: var(--ink);
+}
+
+.monthly-actual-fill {
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+.monthly-projected-fill.fill-good {
+  background: linear-gradient(90deg, var(--accent), var(--good));
+}
+
+.monthly-projected-fill.fill-warn {
+  background: linear-gradient(90deg, var(--accent), #f5b942, var(--warn));
+}
+
+.monthly-projected-fill.fill-danger {
+  background: linear-gradient(90deg, var(--accent), #f5b942, var(--danger));
+}
+
+.annual-context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.annual-stat {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  padding: 14px;
+}
+
+.annual-stat span,
+.annual-stat strong,
+.annual-stat small {
+  display: block;
+}
+
+.annual-stat span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.annual-stat strong {
+  margin-top: 6px;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.annual-stat small {
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.annual-progress-track {
+  height: 14px;
 }
 
 .chart {
@@ -532,11 +706,14 @@ th {
 
   .topbar,
   .progress-meta,
-  .panel-header {
+  .panel-header,
+  .monthly-hero {
     display: grid;
   }
 
   .kpi-grid,
+  .monthly-summary-grid,
+  .annual-context-grid,
   .side-column,
   .status-grid {
     grid-template-columns: 1fr;
