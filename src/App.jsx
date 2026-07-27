@@ -137,7 +137,7 @@ export default function App() {
 
     async function loadDashboardData() {
       try {
-        const response = await fetch("/data/komdigi-usage.json", { cache: "no-store" });
+        const response = await fetch(`${import.meta.env.BASE_URL}data/komdigi-usage.json`, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
         if (!cancelled) {
