@@ -71,14 +71,14 @@ export function MonthlyDetailTable({ rows, monthlyQuotaGb }) {
             const pct = monthlyQuotaGb > 0 ? (row.usageGb / monthlyQuotaGb) * 100 : 0;
             return (
               <tr key={row.reportMonth}>
-                <td>{formatMonth(row.reportMonth)}</td>
-                <td>{numberFmt.format(row.usageGb)}</td>
-                <td>{numberFmt.format(monthlyQuotaGb)}</td>
-                <td className={percentClass(pct)}>{numberFmt.format(pct)}%</td>
-                <td>{integerFmt.format(row.hits || 0)}</td>
-                <td>{numberFmt.format(row.p95Mbps || 0)}</td>
-                <td>{numberFmt.format(row.peakMbps || 0)}</td>
-                <td>
+                <td data-label="Month">{formatMonth(row.reportMonth)}</td>
+                <td data-label="Usage GB">{numberFmt.format(row.usageGb)}</td>
+                <td data-label="Monthly Quota GB">{numberFmt.format(monthlyQuotaGb)}</td>
+                <td data-label="Usage vs Quota" className={percentClass(pct)}>{numberFmt.format(pct)}%</td>
+                <td data-label="Hits">{integerFmt.format(row.hits || 0)}</td>
+                <td data-label="95/5 Mbps">{numberFmt.format(row.p95Mbps || 0)}</td>
+                <td data-label="Peak Mbps">{numberFmt.format(row.peakMbps || 0)}</td>
+                <td data-label="Status">
                   <span className="status-pill">{row.dataStatus || "Imported"}</span>
                 </td>
               </tr>
@@ -113,12 +113,12 @@ export function CpCodeTable({ rows }) {
               const share = totalUsage > 0 ? (row.usageGb / totalUsage) * 100 : 0;
               return (
                 <tr key={`${row.reportMonth}-${row.cpCode}-${row.cpName}`}>
-                  <td>{row.cpCode}</td>
-                  <td>{row.cpName}</td>
-                  <td>{formatMonth(row.reportMonth)}</td>
-                  <td>{numberFmt.format(row.usageGb)}</td>
-                  <td>{integerFmt.format(row.hits || 0)}</td>
-                  <td>{numberFmt.format(share)}%</td>
+                  <td data-label="CP Code">{row.cpCode}</td>
+                  <td data-label="Name / Domain">{row.cpName}</td>
+                  <td data-label="Month">{formatMonth(row.reportMonth)}</td>
+                  <td data-label="Usage GB">{numberFmt.format(row.usageGb)}</td>
+                  <td data-label="Hits">{integerFmt.format(row.hits || 0)}</td>
+                  <td data-label="Share">{numberFmt.format(share)}%</td>
                 </tr>
               );
             })}
