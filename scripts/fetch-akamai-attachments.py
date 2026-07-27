@@ -35,6 +35,10 @@ def env(name: str, default: str | None = None) -> str:
     return value
 
 
+def compact_secret(value: str) -> str:
+    return "".join(value.split())
+
+
 def decode_filename(value: str | None) -> str:
     if not value:
         return ""
@@ -95,7 +99,7 @@ def main() -> int:
     host = env("AKAMAI_IMAP_HOST")
     port = int(env("AKAMAI_IMAP_PORT", "993"))
     user = env("AKAMAI_IMAP_USER")
-    password = env("AKAMAI_IMAP_PASSWORD")
+    password = compact_secret(env("AKAMAI_IMAP_PASSWORD"))
     mailbox = env("AKAMAI_IMAP_MAILBOX", "INBOX")
     subject_filter = env("AKAMAI_MAIL_SUBJECT_FILTER", "Daily Usage Komdigi")
     since_days = int(env("AKAMAI_SEARCH_SINCE_DAYS", "3"))
