@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akamai Usage Monitoring - YTD Quota Tracker</title>
+<style>
+:root {
+  --bg:#0f172a; --panel:#111827; --panel2:#1f2937; --text:#e5e7eb; --muted:#94a3b8;
+  --line:#334155; --good:#22c55e; --warn:#f59e0b; --bad:#ef4444; --accent:#38bdf8; --soft:#0b1220;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(140deg,#0b1220,#111827);color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px}
+.header{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+.title h1{font-size:28px;margin:0 0 8px 0;letter-spacing:-.02em} .title p{margin:0;color:var(--muted);line-height:1.45}
+.badge{background:#172554;color:#bfdbfe;border:1px solid #1d4ed8;border-radius:999px;padding:8px 12px;font-size:13px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:rgba(17,24,39,.88);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 32px rgba(0,0,0,.22)}
+.kpi{grid-column:span 3;min-height:132px} .wide{grid-column:span 8} .side{grid-column:span 4} .full{grid-column:1/-1}
+.label{font-size:13px;color:var(--muted);margin-bottom:8px} .value{font-size:30px;font-weight:750;letter-spacing:-.03em} .sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45}
+.inputrow{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-top:4px}
+.inputbox label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.inputbox input{width:140px;background:#0b1220;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px}
+.progress{height:18px;background:#0b1220;border:1px solid #243244;border-radius:999px;overflow:hidden;margin:12px 0 8px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--warn),var(--bad));border-radius:999px}
+.chart{height:270px;display:flex;align-items:end;gap:10px;border-left:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 10px 8px 10px;margin-top:10px}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.colbar{width:100%;max-width:58px;border-radius:10px 10px 3px 3px;background:linear-gradient(180deg,#38bdf8,#1d4ed8);min-height:2px;position:relative}
+.quotaline{width:100%;height:2px;background:#f59e0b;margin-bottom:3px}
+.xlab{font-size:12px;color:var(--muted);margin-top:7px;white-space:nowrap}
+.tooltip{font-size:11px;color:#e2e8f0;margin-bottom:4px;white-space:nowrap}
+.table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}
+th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:right} th:first-child,td:first-child{text-align:left} th{color:#cbd5e1;font-weight:650;background:#0b1220} td{color:#e5e7eb}
+.status{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;border:1px solid #475569;color:#cbd5e1}
+.note{background:#0b1220;border:1px solid var(--line);border-radius:14px;padding:14px;color:#cbd5e1;line-height:1.55;font-size:14px}
+.good{color:var(--good)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+@media (max-width:900px){.kpi,.wide,.side{grid-column:1/-1}.header{display:block}.badge{display:inline-block;margin-top:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="title">
+      <h1>Akamai Usage Monitoring & Quota Tracker</h1>
+      <p id="subtitle"></p>
+    </div>
+    <div class="badge" id="asof"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card kpi"><div class="label">YTD Usage</div><div class="value" id="ytdUsage">-</div><div class="sub">Accumulated usage from January to current reporting month.</div></div>
+    <div class="card kpi"><div class="label">Annual Quota</div><div class="value" id="annualQuota">-</div><div class="sub">Komdigi purchased quota per year.</div></div>
+    <div class="card kpi"><div class="label">Quota Utilization</div><div class="value" id="quotaPct">-</div><div class="sub" id="remainingText">-</div></div>
+    <div class="card kpi"><div class="label">Current Month Usage</div><div class="value" id="currentMonthUsage">-</div><div class="sub" id="currentMonthSub">-</div></div>
+
+    <div class="card wide">
+      <div class="label">Usage vs Quota Setting</div>
+      <div class="inputrow">
+        <div class="inputbox"><label>Annual quota (TB)</label><input id="quotaInput" type="number" min="0" step="0.1" value="46"></div>
+        <div class="inputbox"><label>Contract start month</label><input id="startMonth" type="month" value="2026-01"></div>
+        <div class="inputbox"><label>As-of date</label><input id="asOfInput" type="date" value="2026-06-23"></div>
+      </div>
+      <div class="progress"><div class="bar" id="quotaBar"></div></div>
+      <div class="sub" id="quotaDetail"></div>
+    </div>
+
+    <div class="card side">
+      <div class="label">Pro-rata YTD Quota</div>
+      <div class="value" id="prorataQuota">-</div>
+      <div class="sub" id="prorataSub">-</div>
+    </div>
+
+    <div class="card full">
+      <div class="label">Monthly Usage Trend</div>
+      <div class="sub">Blue bars show actual usage per month. The monthly quota reference is calculated from the annual quota divided by 12.</div>
+      <div class="chart" id="usageChart"></div>
+    </div>
+
+    <div class="card full">
+      <div class="label">Monthly Detail</div>
+      <table class="table" id="detailTable">
+        <thead><tr><th>Month</th><th>Usage GB</th><th>Monthly Quota GB</th><th>Usage vs Monthly Quota</th><th>Hits</th><th>95/5 Mbps</th><th>Peak Mbps</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card full">
+      <div class="note">
+        <b>Important logic note:</b> this prototype uses the uploaded Akamai <b>Summary</b> CSV for YTD tracking. The quota is set to Komdigi annual quota of <b>46 TB/year</b> and converted to GB for comparison with Akamai usage. For production, the quota value should come from the customer contract table, while Akamai Scheduled Report should update the actual usage daily. If remaining quota is negative, it means the usage has exceeded the quota, but the dashboard keeps the wording as remaining quota to avoid confusion.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const DATA = {"contract": "V-5D9NTHX", "product": "App & API Protector Plus DSA", "as_of": "2026-06-23", "monthly": [{"period": "2026-01", "usage_gb": 7300.153, "hits": 1140337585.0, "p95_mbps": 50.832, "peak_mbps": 1657.132, "status": "Data Finalized"}, {"period": "2026-02", "usage_gb": 6042.604, "hits": 807909550.0, "p95_mbps": 44.373, "peak_mbps": 1451.567, "status": "Data Finalized"}, {"period": "2026-03", "usage_gb": 2980.021, "hits": 697182192.0, "p95_mbps": 19.363, "peak_mbps": 2864.529, "status": "Data Finalized"}, {"period": "2026-04", "usage_gb": 2420.746, "hits": 453299723.0, "p95_mbps": 12.517, "peak_mbps": 2342.664, "status": "Data Finalized"}, {"period": "2026-05", "usage_gb": 2883.389, "hits": 401810484.0, "p95_mbps": 14.842, "peak_mbps": 2496.875, "status": "Data Finalized"}, {"period": "2026-06", "usage_gb": 1694.126, "hits": 291566993.0, "p95_mbps": 10.971, "peak_mbps": 905.46, "status": "Collecting Data"}], "source_file": "Billing usage report for App & API Protector Plus DSA (V-5D9NTHX)-Summary-2026-06-23.csv"};
+const fmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
+const fmt0 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+const monthName = p => new Date(p+'-01T00:00:00').toLocaleString('en-US', { month:'short', year:'numeric' });
+function daysInMonth(d) { return new Date(d.getFullYear(), d.getMonth()+1, 0).getDate(); }
+function monthsElapsed(startPeriod, asOfStr) {
+  const s = new Date(startPeriod+'-01T00:00:00'); const a = new Date(asOfStr+'T00:00:00');
+  const fullMonthsBeforeCurrent = (a.getFullYear()-s.getFullYear())*12 + (a.getMonth()-s.getMonth());
+  const fraction = a.getDate()/daysInMonth(a);
+  return Math.max(0, fullMonthsBeforeCurrent + fraction);
+}
+function calc() {
+  const quotaTb = Number(document.getElementById('quotaInput').value || 0);
+  const quota = quotaTb * 1000; // Akamai usage file is in GB; quota input is in TB
+  const start = document.getElementById('startMonth').value || '2026-01';
+  const asOf = document.getElementById('asOfInput').value || DATA.as_of;
+  const monthlyQuota = quota/12;
+  const ytdUsage = DATA.monthly.reduce((s,m)=>s+(m.usage_gb||0),0);
+  const last = DATA.monthly[DATA.monthly.length-1];
+  const elapsed = monthsElapsed(start, asOf);
+  const prorata = monthlyQuota * elapsed;
+  const quotaPct = quota>0 ? ytdUsage/quota*100 : 0;
+  const proPct = prorata>0 ? ytdUsage/prorata*100 : 0;
+  const remaining = quota-ytdUsage;
+
+  document.getElementById('subtitle').textContent = `${DATA.product} · Contract ${DATA.contract} · Source: ${DATA.source_file}`;
+  document.getElementById('asof').textContent = `As of ${asOf}`;
+  document.getElementById('ytdUsage').textContent = `${fmt.format(ytdUsage)} GB`;
+  document.getElementById('annualQuota').textContent = `${fmt.format(quotaTb)} TB`;
+  document.getElementById('quotaPct').textContent = `${fmt.format(quotaPct)}%`;
+  document.getElementById('quotaPct').className = 'value ' + (quotaPct>100?'bad':quotaPct>80?'warn':'good');
+  document.getElementById('remainingText').textContent = `Remaining quota: ${fmt.format(remaining)} GB (${fmt.format(remaining/1000)} TB)`;
+  document.getElementById('currentMonthUsage').textContent = `${fmt.format(last.usage_gb)} GB`;
+  document.getElementById('currentMonthSub').textContent = `${monthName(last.period)} · ${last.status}`;
+  document.getElementById('prorataQuota').textContent = `${fmt.format(prorata)} GB`;
+  document.getElementById('prorataSub').innerHTML = `YTD usage is <b class="${proPct>100?'bad':proPct>80?'warn':'good'}">${fmt.format(proPct)}%</b> of pro-rata quota. Monthly entitlement: ${fmt.format(monthlyQuota)} GB (${fmt.format(monthlyQuota/1000)} TB).`;
+  document.getElementById('quotaBar').style.width = Math.min(quotaPct,100)+'%';
+  document.getElementById('quotaDetail').textContent = `YTD usage ${fmt.format(ytdUsage)} GB compared with annual quota ${fmt.format(quota)} GB (${fmt.format(quotaTb)} TB). Remaining quota is ${fmt.format(remaining)} GB (${fmt.format(remaining/1000)} TB). Monthly average entitlement is ${fmt.format(monthlyQuota)} GB (${fmt.format(monthlyQuota/1000)} TB).`;
+
+  const maxUsage = Math.max(...DATA.monthly.map(m=>m.usage_gb), monthlyQuota);
+  const chart = document.getElementById('usageChart'); chart.innerHTML='';
+  DATA.monthly.forEach(m=>{
+    const h = maxUsage>0 ? (m.usage_gb/maxUsage*100) : 0;
+    const q = maxUsage>0 ? (monthlyQuota/maxUsage*100) : 0;
+    const col=document.createElement('div'); col.className='col';
+    col.innerHTML=`<div class="tooltip">${fmt.format(m.usage_gb)} GB</div><div class="colbar" style="height:${h}%"></div><div class="quotaline" style="transform:translateY(-${q}px); display:none"></div><div class="xlab">${monthName(m.period).split(' ')[0]}</div>`;
+    chart.appendChild(col);
+  });
+
+  const tbody=document.querySelector('#detailTable tbody'); tbody.innerHTML='';
+  DATA.monthly.forEach(m=>{
+    const pct = monthlyQuota>0 ? m.usage_gb/monthlyQuota*100 : 0;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${monthName(m.period)}</td><td>${fmt.format(m.usage_gb)}</td><td>${fmt.format(monthlyQuota)}</td><td class="${pct>100?'bad':pct>80?'warn':'good'}">${fmt.format(pct)}%</td><td>${fmt0.format(m.hits||0)}</td><td>${fmt.format(m.p95_mbps||0)}</td><td>${fmt.format(m.peak_mbps||0)}</td><td><span class="status">${m.status}</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById('quotaInput').addEventListener('input',calc);
+document.getElementById('startMonth').addEventListener('change',calc);
+document.getElementById('asOfInput').addEventListener('change',calc);
+calc();
+</script>
+</body>
+</html>

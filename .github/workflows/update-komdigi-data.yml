@@ -1,0 +1,61 @@
+name: Update Komdigi Akamai data
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 Jakarta time, after the daily Akamai scheduled report is expected to arrive.
+    - cron: "0 1 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch Akamai CSV attachments
+        id: akamai
+        env:
+          AKAMAI_IMAP_HOST: ${{ secrets.AKAMAI_IMAP_HOST }}
+          AKAMAI_IMAP_PORT: ${{ secrets.AKAMAI_IMAP_PORT }}
+          AKAMAI_IMAP_USER: ${{ secrets.AKAMAI_IMAP_USER }}
+          AKAMAI_IMAP_PASSWORD: ${{ secrets.AKAMAI_IMAP_PASSWORD }}
+          AKAMAI_IMAP_MAILBOX: ${{ secrets.AKAMAI_IMAP_MAILBOX }}
+          AKAMAI_MAIL_SUBJECT_FILTER: ${{ vars.AKAMAI_MAIL_SUBJECT_FILTER || 'Daily Usage Komdigi' }}
+          AKAMAI_SEARCH_SINCE_DAYS: ${{ vars.AKAMAI_SEARCH_SINCE_DAYS || '3' }}
+        run: python3 scripts/fetch-akamai-attachments.py --out-root data/raw
+
+      - name: Generate dashboard data
+        run: |
+          pnpm run data:komdigi -- \
+            --existing public/data/komdigi-usage.json \
+            --summary "${{ steps.akamai.outputs.summary }}" \
+            --daily "${{ steps.akamai.outputs.daily }}" \
+            --cp-code "${{ steps.akamai.outputs['cp-code'] }}" \
+            --out public/data/komdigi-usage.json
+
+      - name: Build dashboard
+        run: pnpm run build
+
+      - name: Commit updated dashboard data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update Komdigi Akamai usage data"
+          file_pattern: public/data/komdigi-usage.json

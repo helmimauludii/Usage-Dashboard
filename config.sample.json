@@ -1,0 +1,12 @@
+{
+  "customer": {
+    "id": "komdigi",
+    "name": "Komdigi",
+    "contractId": "V-5D9NTHX",
+    "productName": "App & API Protector Plus DSA",
+    "annualQuotaTb": 46,
+    "tbToGbFactor": 1000,
+    "contractStartMonth": "2026-01",
+    "active": true
+  }
+}
