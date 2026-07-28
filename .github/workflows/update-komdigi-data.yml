@@ -3,8 +3,11 @@ name: Update Komdigi Akamai data
 on:
   workflow_dispatch:
   schedule:
-    # 08:30 Jakarta time, giving the daily Akamai email time to arrive.
+    # Jakarta time. Multiple windows make the daily Gmail pickup resilient
+    # when GitHub scheduled jobs are delayed or skipped.
     - cron: "30 1 * * *"
+    - cron: "0 2 * * *"
+    - cron: "30 2 * * *"
 
 permissions:
   contents: write
