@@ -272,6 +272,12 @@ label,
   gap: 14px;
 }
 
+.cp-code-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .kpi-card,
 .panel {
   border-radius: 8px;
@@ -308,6 +314,14 @@ label,
   margin-top: 5px;
   font-size: 19px;
   letter-spacing: 0;
+}
+
+.panel-subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .progress-track {
@@ -633,6 +647,10 @@ th {
   color: #475467;
 }
 
+.cp-code-warning {
+  border-left: 4px solid var(--warn);
+}
+
 .logic-note svg {
   color: var(--warn);
   flex: 0 0 auto;
@@ -713,6 +731,7 @@ th {
 
   .kpi-grid,
   .monthly-summary-grid,
+  .cp-code-summary-grid,
   .annual-context-grid,
   .side-column,
   .status-grid {

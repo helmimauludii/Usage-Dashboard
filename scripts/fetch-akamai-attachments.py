@@ -66,12 +66,12 @@ def csv_kind(filename: str) -> str | None:
     lowered = filename.lower()
     if not lowered.endswith(".csv"):
         return None
+    if "cp code" in lowered or "cp-code" in lowered:
+        return "cp-code"
     if "summary" in lowered:
         return "summary"
     if "daily usage" in lowered or "daily-usage" in lowered:
         return "daily"
-    if "cp code" in lowered or "cp-code" in lowered:
-        return "cp-code"
     return None
 
 

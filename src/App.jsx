@@ -45,6 +45,14 @@ function dailyReportTotalGb(dailyRows) {
     .reduce((sum, row) => sum + Number(row.value || 0), 0);
 }
 
+function latestReportDate(rows) {
+  return [...rows]
+    .map((row) => row.reportGeneratedDate)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+}
+
 function monthWindow(asOfDate) {
   const date = new Date(`${asOfDate}T00:00:00`);
   if (Number.isNaN(date.getTime())) {
@@ -175,13 +183,19 @@ export default function App() {
     () => calculateQuota(dashboardData.customer, sortedSummaryRows, asOfDate),
     [dashboardData.customer, sortedSummaryRows, asOfDate],
   );
-  const topCpCode = sortedCpCodeRows.at(0) || null;
   const dailyTotalGb = dailyReportTotalGb(dashboardData.dailyUsage);
   const progressWidth = `${Math.min(100, Math.max(0, quota.quotaUtilizationPct))}%`;
   const remainingTone = quota.remainingQuotaGb < 0 ? "metric-danger" : "metric-good";
   const sourceDescription = dashboardData.sourceFiles.length > 0 ? dashboardData.sourceFiles.join(", ") : "No source file metadata";
   const currentMonthUsageGb = quota.currentMonth?.usageGb || 0;
   const monthlySignal = monthlyControlSignal(currentMonthUsageGb, quota.monthlyQuotaGb, asOfDate);
+  const cpCodeDataDate = latestReportDate(sortedCpCodeRows);
+  const latestCpCodeRows = cpCodeDataDate ? sortedCpCodeRows.filter((row) => row.reportGeneratedDate === cpCodeDataDate) : sortedCpCodeRows;
+  const topCpCode = latestCpCodeRows.at(0) || null;
+  const cpCodeTotalUsageGb = latestCpCodeRows.reduce((sum, row) => sum + Number(row.usageGb || 0), 0);
+  const cpCodeCoveragePct = currentMonthUsageGb > 0 ? (cpCodeTotalUsageGb / currentMonthUsageGb) * 100 : 0;
+  const cpCodeSourceFile = latestCpCodeRows.find((row) => row.sourceFile)?.sourceFile;
+  const cpCodeFreshnessClass = cpCodeDataDate && cpCodeDataDate >= asOfDate ? "metric-good" : "metric-warn";
   const monthlyProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.usageVsMonthlyPct))}%`;
   const projectedProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.projectedVsMonthlyPct))}%`;
   const monthlyToneClass = `metric-${monthlySignal.tone}`;
@@ -338,23 +352,43 @@ export default function App() {
 
           {activeTab === "cpCode" && (
             <>
+              <section className="cp-code-summary-grid">
+                <KpiCard
+                  label="CP Code Data Date"
+                  value={cpCodeDataDate || "-"}
+                  tone={cpCodeFreshnessClass}
+                  subtext={cpCodeDataDate === asOfDate ? "Aligned with latest dashboard data." : `Dashboard is ${asOfDate}; CP Code detail needs the latest attachment.`}
+                />
+                <KpiCard label="CP Code Usage Total" value={formatGb(cpCodeTotalUsageGb)} subtext={`${latestCpCodeRows.length} CP Codes in the latest detail file.`} />
+                <KpiCard label="Detail Coverage" value={`${numberFmt.format(cpCodeCoveragePct)}%`} subtext="Compared with current month Summary usage." />
+              </section>
+              {cpCodeDataDate && cpCodeDataDate < asOfDate && (
+                <section className="logic-note cp-code-warning">
+                  <AlertTriangle size={18} />
+                  <p>
+                    CP Code detail is older than the dashboard summary. The next data run will use the fixed attachment detection so this tab can refresh from the latest CP Code CSV.
+                  </p>
+                </section>
+              )}
               <section className="panel">
                 <div className="panel-header">
                   <div>
                     <div className="label">Top CP Code</div>
-                    <h2>Current month usage distribution</h2>
+                    <h2>Latest CP Code usage distribution</h2>
+                    <p className="panel-subtitle">{cpCodeSourceFile || "No CP Code source file available."}</p>
                   </div>
                 </div>
-                <CpCodeBars rows={sortedCpCodeRows} />
+                <CpCodeBars rows={latestCpCodeRows} />
               </section>
               <section className="panel">
                 <div className="panel-header">
                   <div>
                     <div className="label">CP Code Detail</div>
                     <h2>Breakdown by usage</h2>
+                    <p className="panel-subtitle">Sorted by usage so Komdigi can identify which domain or service drives the month.</p>
                   </div>
                 </div>
-                <CpCodeTable rows={sortedCpCodeRows} />
+                <CpCodeTable rows={latestCpCodeRows} />
               </section>
             </>
           )}
