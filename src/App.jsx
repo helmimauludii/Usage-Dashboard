@@ -86,7 +86,7 @@ function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
       dailyAllowanceGb,
       tone: "danger",
       status: "Follow-up needed this month",
-      guidance: "The month-end projection is above the average monthly entitlement. Review traffic drivers or policy adjustments before month-end.",
+      guidance: "The month-end projection is above the average monthly allocation. Review traffic drivers or policy adjustments before month-end.",
     };
   }
 
@@ -123,7 +123,7 @@ function monthlyControlSignal(currentUsageGb, monthlyQuotaGb, asOfDate) {
     dailyAllowanceGb,
     tone: "good",
     status: "On a controlled pace",
-    guidance: "Current-month usage is tracking within a controlled range against the average monthly entitlement.",
+    guidance: "Current-month usage is tracking within a controlled range against the average monthly allocation.",
   };
 }
 
@@ -231,7 +231,7 @@ export default function App() {
                   <h2>{quota.currentMonth ? formatMonth(quota.currentMonth.reportMonth) : "Current month"}</h2>
                   <div className="hero-metric">{formatGb(currentMonthUsageGb)}</div>
                   <p>
-                    Day {monthlySignal.dayOfMonth} of {monthlySignal.daysInMonth} · {numberFmt.format(monthlySignal.usageVsMonthlyPct)}% of monthly entitlement used
+                    Day {monthlySignal.dayOfMonth} of {monthlySignal.daysInMonth} · {numberFmt.format(monthlySignal.usageVsMonthlyPct)}% of monthly allocation used
                   </p>
                 </div>
                 <div className="monthly-signal-card">
@@ -242,7 +242,7 @@ export default function App() {
               </section>
 
               <section className="monthly-summary-grid">
-                <KpiCard label="Monthly Entitlement" value={formatGb(quota.monthlyQuotaGb)} subtext="Average monthly allowance derived from the annual 46 TB quota." />
+                <KpiCard label="Monthly Allocation" value={formatGb(quota.monthlyQuotaGb)} subtext="Average monthly allocation derived from the annual 46 TB quota." />
                 <KpiCard label="Projected Month End" value={formatGb(monthlySignal.projectedUsageGb)} tone={monthlyToneClass} subtext={`Current daily average: ${formatGb(monthlySignal.dailyAverageGb)} per day.`} />
                 <KpiCard label="Remaining This Month" value={formatGb(monthlySignal.remainingMonthlyGb)} tone={monthlySignal.remainingMonthlyGb < 0 ? "metric-danger" : ""} subtext={`${monthlySignal.daysRemaining} days left · ${formatGb(monthlySignal.dailyAllowanceGb)} daily headroom.`} />
                 <KpiCard label="Usage Pace" value={`${numberFmt.format(monthlySignal.pacePct)}%`} tone={monthlyToneClass} subtext={`Expected by today: ${formatGb(monthlySignal.expectedUsageGb)}.`} />
@@ -254,7 +254,7 @@ export default function App() {
                 <div className="panel-header">
                   <div>
                     <div className="label">Monthly Progress</div>
-                    <h2>Usage against controllable monthly entitlement</h2>
+                    <h2>Usage against controllable monthly allocation</h2>
                   </div>
                   <strong className={monthlyToneClass}>{formatGb(monthlySignal.remainingMonthlyGb)} remaining</strong>
                 </div>
@@ -284,7 +284,7 @@ export default function App() {
                 <div className="panel-header">
                   <div>
                     <div className="label">Monthly Usage Trend</div>
-                    <h2>Usage vs monthly average entitlement</h2>
+                    <h2>Usage vs monthly average allocation</h2>
                   </div>
                 </div>
                 <MonthlyUsageChart rows={sortedSummaryRows} monthlyQuotaGb={quota.monthlyQuotaGb} />

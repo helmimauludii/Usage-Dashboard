@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prepare-sites-dist.mjs",
     "data:komdigi": "node scripts/generate-dashboard-data.mjs",
     "fetch:akamai": "python3 scripts/fetch-akamai-attachments.py",
+    "notify:telegram": "node scripts/send-telegram-notification.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

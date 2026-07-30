@@ -43,6 +43,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Capture previous dashboard data
+        run: cp public/data/komdigi-usage.json /tmp/komdigi-usage-before.json
+
       - name: Fetch Akamai CSV attachments
         id: akamai
         env:
@@ -63,6 +66,16 @@ jobs:
             --daily "${{ steps.akamai.outputs.daily }}" \
             --cp-code "${{ steps.akamai.outputs['cp-code'] }}" \
             --out public/data/komdigi-usage.json
+
+      - name: Send Telegram notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          pnpm run notify:telegram -- \
+            --data public/data/komdigi-usage.json \
+            --previous /tmp/komdigi-usage-before.json \
+            --dashboard-url https://helmimauludii.github.io/Usage-Dashboard/
 
       - name: Build dashboard
         env:

@@ -62,7 +62,7 @@ Cards:
 
 Charts:
 - Monthly Usage Trend
-- Usage vs Monthly Average Entitlement
+- Usage vs Monthly Average Allocation
 - Quota Utilization Progress
 
 ### 2. CP Code Detail
