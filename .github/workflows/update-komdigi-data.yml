@@ -8,11 +8,10 @@ on:
     paths:
       - ".github/workflows/update-komdigi-data.yml"
   schedule:
-    # GitHub cron uses UTC. These windows cover 08:15-10:45 Jakarta time
-    # to tolerate delayed Akamai email delivery and skipped GitHub cron slots.
-    - cron: "15,30,45 1 * * *"
-    - cron: "0,15,30,45 2 * * *"
-    - cron: "0,15,30,45 3 * * *"
+    # GitHub cron uses UTC. These slots run at 08:30, 09:00, and 09:30 WIB
+    # so the dashboard updates soon after the 08:00 Akamai report email lands.
+    - cron: "30 1 * * *"
+    - cron: "0,30 2 * * *"
 
 concurrency:
   group: komdigi-akamai-data
