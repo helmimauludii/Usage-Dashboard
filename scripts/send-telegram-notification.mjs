@@ -128,7 +128,7 @@ function buildMessage(data, dashboardUrl) {
   if (topCpCodes.length > 0) {
     lines.push("", "<b>Top 3 CP Code</b>");
     topCpCodes.forEach((row, index) => {
-      lines.push(`${index + 1}. <code>${escapeHtml(row.cpCode)}</code> - ${escapeHtml(row.cpName)}`, escapeHtml(formatGb(row.usageGb)));
+      lines.push(`${index + 1}. ${escapeHtml(row.cpName)}: <b>${escapeHtml(formatGb(row.usageGb))}</b>`);
     });
   }
 
