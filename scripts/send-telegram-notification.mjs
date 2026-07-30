@@ -109,31 +109,27 @@ function buildMessage(data, dashboardUrl) {
   const quota = calculateQuota(data.customer, monthlyRows, data.asOfDate);
   const currentUsageGb = quota.currentMonth?.usageGb || 0;
   const signal = monthlyControlSignal(currentUsageGb, quota.monthlyQuotaGb, data.asOfDate);
-  const topCpCode = cpCodeRows.at(0);
+  const topCpCodes = cpCodeRows.slice(0, 3);
 
   const lines = [
-    "<b>Komdigi Akamai Usage Update</b>",
-    `<code>${escapeHtml(formatDate(data.asOfDate))}</code>`,
+    "<b>Komdigi Akamai Usage</b>",
+    escapeHtml(formatDate(data.asOfDate)),
     "",
-    "<b>Monthly Usage</b>",
-    `Month: ${escapeHtml(quota.currentMonth ? formatMonth(quota.currentMonth.reportMonth) : "-")}`,
-    `Usage: <b>${escapeHtml(formatGb(currentUsageGb))}</b>`,
-    `Allocation: ${escapeHtml(formatGb(quota.monthlyQuotaGb))}`,
-    `Utilization: <b>${escapeHtml(numberFmt.format(signal.usageVsMonthlyPct))}%</b>`,
+    "<b>Current Month Usage</b>",
+    `<b>${escapeHtml(formatGb(currentUsageGb))}</b>`,
+    "",
+    `<b>${escapeHtml(numberFmt.format(signal.usageVsMonthlyPct))}%</b> of Monthly Allocation (Monthly Allocation: ${escapeHtml(formatGb(quota.monthlyQuotaGb))})`,
     `Status: <b>${escapeHtml(signal.status)}</b>`,
     "",
-    "<b>Annual Context</b>",
     `YTD Usage: ${escapeHtml(formatGb(quota.ytdUsageGb))}`,
-    `Remaining: ${escapeHtml(formatGb(quota.remainingQuotaGb))}`,
+    `Remaining Annual: ${escapeHtml(formatGb(quota.remainingQuotaGb))}`,
   ];
 
-  if (topCpCode) {
-    lines.push(
-      "",
-      "<b>Top CP Code</b>",
-      `<code>${escapeHtml(topCpCode.cpCode)}</code> - ${escapeHtml(topCpCode.cpName)}`,
-      escapeHtml(formatGb(topCpCode.usageGb)),
-    );
+  if (topCpCodes.length > 0) {
+    lines.push("", "<b>Top 3 CP Code</b>");
+    topCpCodes.forEach((row, index) => {
+      lines.push(`${index + 1}. <code>${escapeHtml(row.cpCode)}</code> - ${escapeHtml(row.cpName)}`, escapeHtml(formatGb(row.usageGb)));
+    });
   }
 
   lines.push("", `<a href="${escapeHtml(dashboardUrl)}">Open dashboard</a>`);
