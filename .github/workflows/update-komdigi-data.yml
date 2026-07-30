@@ -71,11 +71,13 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FORCE_TELEGRAM_NOTIFICATION: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
         run: |
           pnpm run notify:telegram -- \
             --data public/data/komdigi-usage.json \
             --previous /tmp/komdigi-usage-before.json \
-            --dashboard-url https://helmimauludii.github.io/Usage-Dashboard/
+            --dashboard-url https://helmimauludii.github.io/Usage-Dashboard/ \
+            --force "$FORCE_TELEGRAM_NOTIFICATION"
 
       - name: Build dashboard
         env:
