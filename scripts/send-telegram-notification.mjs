@@ -19,6 +19,23 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function formatDate(value) {
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return value || "-";
+  return date.toLocaleString("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 function monthWindow(asOfDate) {
   const date = new Date(`${asOfDate}T00:00:00`);
   if (Number.isNaN(date.getTime())) {
@@ -95,24 +112,31 @@ function buildMessage(data, dashboardUrl) {
   const topCpCode = cpCodeRows.at(0);
 
   const lines = [
-    "Komdigi Akamai Usage Update",
-    `Date: ${data.asOfDate}`,
+    "<b>Komdigi Akamai Usage Update</b>",
+    `<code>${escapeHtml(formatDate(data.asOfDate))}</code>`,
     "",
-    `Current Month: ${quota.currentMonth ? formatMonth(quota.currentMonth.reportMonth) : "-"}`,
-    `Current Month Usage: ${formatGb(currentUsageGb)}`,
-    `Monthly Allocation: ${formatGb(quota.monthlyQuotaGb)}`,
-    `Usage vs Allocation: ${numberFmt.format(signal.usageVsMonthlyPct)}%`,
-    `Status: ${signal.status}`,
+    "<b>Monthly Usage</b>",
+    `Month: ${escapeHtml(quota.currentMonth ? formatMonth(quota.currentMonth.reportMonth) : "-")}`,
+    `Usage: <b>${escapeHtml(formatGb(currentUsageGb))}</b>`,
+    `Allocation: ${escapeHtml(formatGb(quota.monthlyQuotaGb))}`,
+    `Utilization: <b>${escapeHtml(numberFmt.format(signal.usageVsMonthlyPct))}%</b>`,
+    `Status: <b>${escapeHtml(signal.status)}</b>`,
     "",
-    `YTD Usage: ${formatGb(quota.ytdUsageGb)}`,
-    `Annual Remaining: ${formatGb(quota.remainingQuotaGb)}`,
+    "<b>Annual Context</b>",
+    `YTD Usage: ${escapeHtml(formatGb(quota.ytdUsageGb))}`,
+    `Remaining: ${escapeHtml(formatGb(quota.remainingQuotaGb))}`,
   ];
 
   if (topCpCode) {
-    lines.push("", `Top CP Code: ${topCpCode.cpCode}`, `${topCpCode.cpName} - ${formatGb(topCpCode.usageGb)}`);
+    lines.push(
+      "",
+      "<b>Top CP Code</b>",
+      `<code>${escapeHtml(topCpCode.cpCode)}</code> - ${escapeHtml(topCpCode.cpName)}`,
+      escapeHtml(formatGb(topCpCode.usageGb)),
+    );
   }
 
-  lines.push("", `Dashboard: ${dashboardUrl}`);
+  lines.push("", `<a href="${escapeHtml(dashboardUrl)}">Open dashboard</a>`);
   return lines.join("\n");
 }
 
@@ -123,6 +147,7 @@ async function sendTelegramMessage(token, chatId, message) {
     body: JSON.stringify({
       chat_id: chatId,
       text: message,
+      parse_mode: "HTML",
       disable_web_page_preview: true,
     }),
   });
