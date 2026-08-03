@@ -95,8 +95,8 @@ function readCsv(text) {
     .split(/\r?\n/)
     .filter((line) => line.trim().length > 0);
 
-  if (lines.length < 2) {
-    throw new Error("CSV must include a header row and at least one data row.");
+  if (lines.length < 1) {
+    throw new Error("CSV must include a header row.");
   }
 
   const headers = splitCsvLine(lines[0]);
@@ -207,6 +207,10 @@ export function parseAkamaiCsv(text, fileType, sourceFile) {
   const { mapping, rows } = readCsv(text);
 
   if (fileType === "summary") {
+    if (rows.length === 0) {
+      throw new Error("Summary CSV must include at least one data row.");
+    }
+
     const hasMetricRows =
       mapping.usageDate !== undefined &&
       mapping.value !== undefined &&
@@ -257,9 +261,6 @@ export function parseAkamaiCsv(text, fileType, sourceFile) {
 
     if (hasMetricRows) {
       const parsedRows = parseAkamaiCpCodeMetricRows(rows, mapping, sourceFile);
-      if (parsedRows.length === 0) {
-        throw new Error("CP Code CSV was detected, but no CP Code Bytes/GB usage rows were found.");
-      }
       return parsedRows;
     }
 
