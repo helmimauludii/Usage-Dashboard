@@ -27,6 +27,7 @@ export function MonthlyUsageChart({ rows, monthlyQuotaGb }) {
 export function CpCodeBars({ rows }) {
   const topRows = [...rows].sort((a, b) => b.usageGb - a.usageGb).slice(0, 10);
   const maxUsage = Math.max(...topRows.map((row) => row.usageGb), 1);
+  const totalUsage = topRows.reduce((sum, row) => sum + Number(row.usageGb || 0), 0);
 
   if (topRows.length === 0) {
     return <div className="empty-state">No CP Code data imported yet.</div>;
@@ -34,18 +35,27 @@ export function CpCodeBars({ rows }) {
 
   return (
     <div className="ranked-bars">
-      {topRows.map((row) => (
+      {topRows.map((row, index) => {
+        const share = totalUsage > 0 ? (row.usageGb / totalUsage) * 100 : 0;
+        return (
         <div className="ranked-row" key={`${row.cpCode}-${row.cpName}`}>
           <div className="ranked-label">
-            <strong>{row.cpCode}</strong>
-            <span>{row.cpName}</span>
+            <span className="rank-number">{index + 1}</span>
+            <div>
+              <strong>{row.cpName}</strong>
+              <span>{row.cpCode}</span>
+            </div>
           </div>
           <div className="ranked-track">
             <div className="ranked-fill" style={{ width: `${(row.usageGb / maxUsage) * 100}%` }} />
           </div>
-          <div className="ranked-value">{formatGb(row.usageGb)}</div>
+          <div className="ranked-value">
+            <strong>{formatGb(row.usageGb)}</strong>
+            <span>{numberFmt.format(share)}% of top 10</span>
+          </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

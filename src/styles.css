@@ -25,7 +25,8 @@
 body {
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(14, 165, 163, 0.09), rgba(14, 165, 163, 0) 280px),
+    radial-gradient(circle at 8% 0%, rgba(37, 99, 235, 0.12), rgba(37, 99, 235, 0) 320px),
+    linear-gradient(180deg, rgba(14, 165, 163, 0.1), rgba(14, 165, 163, 0) 300px),
     #f5f7fb;
 }
 
@@ -243,6 +244,42 @@ label,
   line-height: 1.45;
 }
 
+.hero-driver-list {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.hero-driver-list > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.driver-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.driver-row strong {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.driver-row small {
+  color: #344054;
+  font-weight: 800;
+}
+
 .signal-pill {
   width: fit-content;
   border-radius: 999px;
@@ -276,6 +313,94 @@ label,
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+}
+
+.cp-code-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 247, 255, 0.96));
+  box-shadow: var(--shadow);
+}
+
+.cp-code-spotlight h2 {
+  margin-top: 8px;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+
+.spotlight-metric {
+  margin-top: 10px;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.cp-code-spotlight p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.cp-code-actions {
+  display: grid;
+  gap: 12px;
+  align-content: center;
+}
+
+.cp-search {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
+.cp-search svg {
+  color: var(--muted);
+}
+
+.cp-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+}
+
+.cp-mini-stat {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+}
+
+.cp-mini-stat svg {
+  color: var(--accent-strong);
+}
+
+.cp-mini-stat span,
+.cp-mini-stat strong {
+  display: block;
+}
+
+.cp-mini-stat span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.cp-mini-stat strong {
+  font-size: 24px;
+  line-height: 1;
 }
 
 .kpi-card,
@@ -569,12 +694,47 @@ th {
 
 .ranked-row {
   display: grid;
-  grid-template-columns: 220px minmax(120px, 1fr) 110px;
-  gap: 12px;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(180px, 1.2fr) 150px;
+  gap: 14px;
   align-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px 6px;
 }
 
-.ranked-label span {
+.ranked-row:hover {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+.ranked-label {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+.rank-number {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf4ff;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.ranked-label strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranked-label span:not(.rank-number) {
   display: block;
   color: var(--muted);
   font-size: 13px;
@@ -595,8 +755,22 @@ th {
 
 .ranked-value {
   text-align: right;
+}
+
+.ranked-value strong,
+.ranked-value span {
+  display: block;
+}
+
+.ranked-value strong {
   color: #344054;
-  font-weight: 750;
+  font-weight: 850;
+}
+
+.ranked-value span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .empty-state,
@@ -725,8 +899,10 @@ th {
   .topbar,
   .progress-meta,
   .panel-header,
-  .monthly-hero {
+  .monthly-hero,
+  .cp-code-hero {
     display: grid;
+    grid-template-columns: 1fr;
   }
 
   .kpi-grid,

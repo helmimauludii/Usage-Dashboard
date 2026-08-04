@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarClock, Database, FileText, Gauge } from "lucide-react";
+import { AlertTriangle, CalendarClock, Database, FileText, Gauge, Search, TrendingUp } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { CpCodeBars, CpCodeTable, MonthlyDetailTable, MonthlyUsageChart } from "./components/Charts";
 import { KpiCard } from "./components/KpiCard";
@@ -139,6 +139,7 @@ export default function App() {
   const [dashboardData, setDashboardData] = useState(fallbackDashboardData);
   const [loadStatus, setLoadStatus] = useState("loading");
   const [activeTab, setActiveTab] = useState("overview");
+  const [cpCodeFilter, setCpCodeFilter] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -192,10 +193,17 @@ export default function App() {
   const cpCodeDataDate = latestReportDate(sortedCpCodeRows);
   const latestCpCodeRows = cpCodeDataDate ? sortedCpCodeRows.filter((row) => row.reportGeneratedDate === cpCodeDataDate) : sortedCpCodeRows;
   const topCpCode = latestCpCodeRows.at(0) || null;
+  const topThreeCpCodes = latestCpCodeRows.slice(0, 3);
   const cpCodeTotalUsageGb = latestCpCodeRows.reduce((sum, row) => sum + Number(row.usageGb || 0), 0);
   const cpCodeCoveragePct = currentMonthUsageGb > 0 ? (cpCodeTotalUsageGb / currentMonthUsageGb) * 100 : 0;
   const cpCodeSourceFile = latestCpCodeRows.find((row) => row.sourceFile)?.sourceFile;
   const cpCodeFreshnessClass = cpCodeDataDate && cpCodeDataDate >= asOfDate ? "metric-good" : "metric-warn";
+  const cpCodeDominancePct = cpCodeTotalUsageGb > 0 && topCpCode ? (topCpCode.usageGb / cpCodeTotalUsageGb) * 100 : 0;
+  const filteredCpCodeRows = latestCpCodeRows.filter((row) => {
+    const query = cpCodeFilter.trim().toLowerCase();
+    if (!query) return true;
+    return `${row.cpCode} ${row.cpName}`.toLowerCase().includes(query);
+  });
   const monthlyProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.usageVsMonthlyPct))}%`;
   const projectedProgressWidth = `${Math.min(100, Math.max(0, monthlySignal.projectedVsMonthlyPct))}%`;
   const monthlyToneClass = `metric-${monthlySignal.tone}`;
@@ -252,6 +260,17 @@ export default function App() {
                   <span className={`signal-pill signal-${monthlySignal.tone}`}>{monthlySignal.status}</span>
                   <strong>{numberFmt.format(monthlySignal.projectedVsMonthlyPct)}% projected</strong>
                   <p>{monthlySignal.guidance}</p>
+                  {topThreeCpCodes.length > 0 && (
+                    <div className="hero-driver-list">
+                      <span>Top usage drivers</span>
+                      {topThreeCpCodes.map((row, index) => (
+                        <div className="driver-row" key={`${row.cpCode}-${row.cpName}`}>
+                          <strong>{index + 1}. {row.cpName}</strong>
+                          <small>{formatGb(row.usageGb)}</small>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </section>
 
@@ -352,6 +371,37 @@ export default function App() {
 
           {activeTab === "cpCode" && (
             <>
+              <section className="cp-code-hero">
+                <div className="cp-code-spotlight">
+                  <div className="label">Primary Usage Driver</div>
+                  <h2>{topCpCode ? topCpCode.cpName : "No CP Code data available"}</h2>
+                  <div className="spotlight-metric">{topCpCode ? formatGb(topCpCode.usageGb) : "-"}</div>
+                  <p>
+                    {topCpCode
+                      ? `${topCpCode.cpCode} contributes ${numberFmt.format(cpCodeDominancePct)}% of latest CP Code usage.`
+                      : "The dashboard will show CP Code detail after Akamai sends a populated CP Code CSV."}
+                  </p>
+                </div>
+                <div className="cp-code-actions">
+                  <div className="cp-search">
+                    <Search size={16} />
+                    <input
+                      value={cpCodeFilter}
+                      onChange={(event) => setCpCodeFilter(event.target.value)}
+                      placeholder="Search CP Code or domain"
+                      aria-label="Search CP Code or domain"
+                    />
+                  </div>
+                  <div className="cp-mini-stat">
+                    <TrendingUp size={16} />
+                    <div>
+                      <span>Visible rows</span>
+                      <strong>{filteredCpCodeRows.length}</strong>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <section className="cp-code-summary-grid">
                 <KpiCard
                   label="CP Code Data Date"
@@ -378,7 +428,7 @@ export default function App() {
                     <p className="panel-subtitle">{cpCodeSourceFile || "No CP Code source file available."}</p>
                   </div>
                 </div>
-                <CpCodeBars rows={latestCpCodeRows} />
+                <CpCodeBars rows={filteredCpCodeRows} />
               </section>
               <section className="panel">
                 <div className="panel-header">
@@ -388,7 +438,7 @@ export default function App() {
                     <p className="panel-subtitle">Sorted by usage so Komdigi can identify which domain or service drives the month.</p>
                   </div>
                 </div>
-                <CpCodeTable rows={latestCpCodeRows} />
+                <CpCodeTable rows={filteredCpCodeRows} />
               </section>
             </>
           )}
