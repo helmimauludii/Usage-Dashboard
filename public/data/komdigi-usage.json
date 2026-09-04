@@ -9,8 +9,8 @@
     "contractStartMonth": "2026-01",
     "active": true
   },
-  "asOfDate": "2026-08-31",
-  "generatedAt": "2026-08-31T07:51:17.044Z",
+  "asOfDate": "2026-09-04",
+  "generatedAt": "2026-09-04T06:24:50.597Z",
   "sourceFiles": [
     "YTD 2026-Summary-2026-07-06.csv",
     "Daily Usage Komdigi-Summary-2026-07-06.csv",
@@ -111,7 +111,10 @@
     "Daily Usage Komdigi-CP Code data-2026-08-30.csv",
     "Daily Usage Komdigi-Summary-2026-08-31.csv",
     "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-    "Daily Usage Komdigi-CP Code data-2026-08-31.csv"
+    "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
+    "Daily Usage Komdigi-Summary-2026-09-04.csv",
+    "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+    "Daily Usage Komdigi-CP Code data-2026-09-04.csv"
   ],
   "monthly": [
     {
@@ -193,1225 +196,254 @@
       "dataStatus": "Collecting Data",
       "sourceFile": "Daily Usage Komdigi-Summary-2026-08-31.csv",
       "reportGeneratedDate": "2026-08-31"
+    },
+    {
+      "reportMonth": "2026-09",
+      "usageGb": 237.894,
+      "hits": 9389146,
+      "p95Mbps": 7.116,
+      "peakMbps": 32.731,
+      "dataStatus": "Collecting Data",
+      "sourceFile": "Daily Usage Komdigi-Summary-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     }
   ],
   "dailyUsage": [
     {
-      "usageDate": "2026-08-01",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-01",
+      "reportMonth": "2026-09",
       "statisticType": "Bytes",
       "uom": "GB",
-      "value": 57.587,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 84.458,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-02",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-02",
+      "reportMonth": "2026-09",
       "statisticType": "Bytes",
       "uom": "GB",
-      "value": 127.201,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 170.436,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-03",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-30",
+      "reportMonth": "2026-09",
       "statisticType": "Bytes",
       "uom": "GB",
-      "value": 223.834,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 237.894,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-04",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 315.234,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-05",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 418.732,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-06",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 503.169,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-07",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 586.348,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-08",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 669.967,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-09",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 745.439,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-10",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 944.929,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-11",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 1279.206,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-12",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 1554.634,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-13",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 1777.686,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-14",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 1996.426,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-15",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 2117.377,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-16",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 2472.28,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-17",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 2640.691,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-18",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 2797.019,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-19",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 2943.24,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-20",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3064.201,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-21",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3170.265,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-22",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3262.076,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-23",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3358.341,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-24",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3488.008,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-25",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3621.029,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-26",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3741.549,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-27",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3870.608,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-28",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 3956.585,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-29",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 4028.552,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-31",
-      "reportMonth": "2026-08",
-      "statisticType": "Bytes",
-      "uom": "GB",
-      "value": 4042.012,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-01",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-01",
+      "reportMonth": "2026-09",
       "statisticType": "95/5 Mbps",
       "uom": "95/5 Mbps",
-      "value": 7.733,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 13.785,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-02",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-02",
+      "reportMonth": "2026-09",
       "statisticType": "95/5 Mbps",
       "uom": "95/5 Mbps",
-      "value": 9.161,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 14.139,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-03",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-30",
+      "reportMonth": "2026-09",
       "statisticType": "95/5 Mbps",
       "uom": "95/5 Mbps",
-      "value": 14.938,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 7.116,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-04",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 14.887,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-05",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 14.938,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-06",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 14.849,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-07",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 14.581,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-08",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 14.203,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-09",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 13.937,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-10",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 21.604,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-11",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 29.891,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-12",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 35.6,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-13",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 36.925,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-14",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 36.491,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-15",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 36.105,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-16",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 35.636,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-17",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 35.57,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-18",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 35.19,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-19",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 34.945,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-20",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 34.49,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-21",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 33.981,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-22",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 33.557,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-23",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 32.97,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-24",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 32.269,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-25",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 32.966,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-26",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 32.161,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-27",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 32.103,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-28",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 31.722,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-29",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 31.329,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-31",
-      "reportMonth": "2026-08",
-      "statisticType": "95/5 Mbps",
-      "uom": "95/5 Mbps",
-      "value": 30.494,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-01",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-01",
+      "reportMonth": "2026-09",
       "statisticType": "Hits",
       "uom": "Hits",
-      "value": 3506137,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 3726521,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-02",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-02",
+      "reportMonth": "2026-09",
       "statisticType": "Hits",
       "uom": "Hits",
-      "value": 7150673,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 7342866,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-03",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-30",
+      "reportMonth": "2026-09",
       "statisticType": "Hits",
       "uom": "Hits",
-      "value": 10982409,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 9389146,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-04",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 19229796,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-05",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 40215680,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-06",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 48814469,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-07",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 64776821,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-08",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 72999620,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-09",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 76061642,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-10",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 93963427,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-11",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 109080472,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-12",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 113178811,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-13",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 138660375,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-14",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 154186938,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-15",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 158423813,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-16",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 307770665,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-17",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 316539979,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-18",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 322071775,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-19",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 347169741,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-20",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 351274024,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-21",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 354762112,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-22",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 357703948,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-23",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 360211491,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-24",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 383421434,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-25",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 386630911,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-26",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 391207480,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-27",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 427701615,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-28",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 432455900,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-29",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 442710288,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-31",
-      "reportMonth": "2026-08",
-      "statisticType": "Hits",
-      "uom": "Hits",
-      "value": 443090753,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-01",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-01",
+      "reportMonth": "2026-09",
       "statisticType": "Peak Mbps",
       "uom": "Peak Mbps",
-      "value": 18.013,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 32.731,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-02",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-02",
+      "reportMonth": "2026-09",
       "statisticType": "Peak Mbps",
       "uom": "Peak Mbps",
-      "value": 65.557,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 32.731,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "usageDate": "2026-08-03",
-      "reportMonth": "2026-08",
+      "usageDate": "2026-09-30",
+      "reportMonth": "2026-09",
       "statisticType": "Peak Mbps",
       "uom": "Peak Mbps",
-      "value": 65.557,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-04",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 93.976,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-05",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 259.802,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-06",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 259.802,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-07",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 265.594,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-08",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 265.594,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-09",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 265.594,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-10",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 375.604,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-11",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 734.814,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-12",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 734.814,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-13",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 734.816,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-14",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 1085.8,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-15",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 1085.8,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-16",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-17",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-18",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-19",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-20",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-21",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-22",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-23",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-24",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-25",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-26",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-27",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-28",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-29",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "usageDate": "2026-08-31",
-      "reportMonth": "2026-08",
-      "statisticType": "Peak Mbps",
-      "uom": "Peak Mbps",
-      "value": 4230.703,
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "value": 32.731,
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     }
   ],
   "cpCode": [
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1773000",
       "cpName": "www.komdigi.go.id",
-      "usageGb": 1776.846,
-      "hits": 412308875,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 99.072,
+      "hits": 6496778,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1778914",
       "cpName": "PDSI.Komdigi",
-      "usageGb": 1034.24,
-      "hits": 17807961,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 34.135,
+      "hits": 1529199,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1764310",
       "cpName": "bpsdm.komdigi.go.id",
-      "usageGb": 374.335,
-      "hits": 352379,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 33.893,
+      "hits": 34082,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
-      "cpCode": "1778906",
-      "cpName": "DJED.Komdigi",
-      "usageGb": 373.185,
-      "hits": 3720876,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1847274",
       "cpName": "DJPRD.Komdigi",
-      "usageGb": 216.311,
-      "hits": 2774548,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 27.07,
+      "hits": 345441,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1800879",
       "cpName": "DJKPM.Komdigi",
-      "usageGb": 92.894,
-      "hits": 707007,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 11.31,
+      "hits": 61291,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1771808",
       "cpName": "csirt.komdigi.go.id",
-      "usageGb": 68.569,
-      "hits": 443438,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 10.124,
+      "hits": 84708,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
+      "cpCode": "1778906",
+      "cpName": "DJED.Komdigi",
+      "usageGb": 7.782,
+      "hits": 227120,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
+    },
+    {
+      "reportMonth": "2026-09",
       "cpCode": "1771774",
       "cpName": "e-penyiaran.komdigi.go.id",
-      "usageGb": 45.332,
-      "hits": 450948,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 7.539,
+      "hits": 46048,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
-      "cpCode": "1804534",
-      "cpName": "DJID.Komdigi",
-      "usageGb": 21.532,
-      "hits": 618054,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1754488",
       "cpName": "apik.komdigi.go.id",
-      "usageGb": 17.628,
-      "hits": 1567437,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 3.096,
+      "hits": 239253,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
-      "cpCode": "1778902",
-      "cpName": "SETJEN.Komdigi",
-      "usageGb": 8.363,
-      "hits": 552292,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "reportMonth": "2026-09",
+      "cpCode": "1804534",
+      "cpName": "DJID.Komdigi",
+      "usageGb": 1.905,
+      "hits": 58381,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1778297",
       "cpName": "layanan.komdigi.go.id",
-      "usageGb": 7.831,
-      "hits": 1272883,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 0.954,
+      "hits": 161807,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
+      "cpCode": "1778902",
+      "cpName": "SETJEN.Komdigi",
+      "usageGb": 0.583,
+      "hits": 58307,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
+    },
+    {
+      "reportMonth": "2026-09",
       "cpCode": "1778927",
       "cpName": "BPSDM.Komdigi",
-      "usageGb": 2.885,
-      "hits": 321244,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 0.234,
+      "hits": 34185,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     },
     {
-      "reportMonth": "2026-08",
+      "reportMonth": "2026-09",
       "cpCode": "1778899",
       "cpName": "earsip.komdigi.go.id",
-      "usageGb": 2.055,
-      "hits": 192781,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
-    },
-    {
-      "reportMonth": "2026-08",
-      "cpCode": "1812627",
-      "cpName": "web.komdigi.go.id",
-      "usageGb": 0.004,
-      "hits": 30,
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
-      "reportGeneratedDate": "2026-08-31"
+      "usageGb": 0.197,
+      "hits": 12546,
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "reportGeneratedDate": "2026-09-04"
     }
   ],
   "ingestionRuns": [
@@ -1447,30 +479,6 @@
     },
     {
       "fileType": "daily-summary",
-      "sourceFile": "Daily Usage Komdigi-Summary-2026-08-27.csv",
-      "status": "success",
-      "rowCount": 1
-    },
-    {
-      "fileType": "daily-usage",
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-08-27.csv",
-      "status": "success",
-      "rowCount": 104
-    },
-    {
-      "fileType": "cp-code",
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-27.csv",
-      "status": "success",
-      "rowCount": 15
-    },
-    {
-      "fileType": "backfill-summary",
-      "sourceFile": null,
-      "status": "skipped",
-      "rowCount": 0
-    },
-    {
-      "fileType": "daily-summary",
       "sourceFile": "Daily Usage Komdigi-Summary-2026-08-28.csv",
       "status": "success",
       "rowCount": 1
@@ -1654,6 +662,30 @@
       "sourceFile": "Daily Usage Komdigi-CP Code data-2026-08-31.csv",
       "status": "success",
       "rowCount": 15
+    },
+    {
+      "fileType": "backfill-summary",
+      "sourceFile": null,
+      "status": "skipped",
+      "rowCount": 0
+    },
+    {
+      "fileType": "daily-summary",
+      "sourceFile": "Daily Usage Komdigi-Summary-2026-09-04.csv",
+      "status": "success",
+      "rowCount": 1
+    },
+    {
+      "fileType": "daily-usage",
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-09-04.csv",
+      "status": "success",
+      "rowCount": 12
+    },
+    {
+      "fileType": "cp-code",
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-09-04.csv",
+      "status": "success",
+      "rowCount": 14
     }
   ]
 }
