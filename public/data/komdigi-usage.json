@@ -10,7 +10,7 @@
     "active": true
   },
   "asOfDate": "2026-10-31",
-  "generatedAt": "2026-10-31T07:25:15.077Z",
+  "generatedAt": "2026-10-31T07:41:52.311Z",
   "sourceFiles": [
     "YTD 2026-Summary-2026-07-06.csv",
     "Daily Usage Komdigi-Summary-2026-07-06.csv",
@@ -1602,30 +1602,6 @@
     },
     {
       "fileType": "daily-summary",
-      "sourceFile": "Daily Usage Komdigi-Summary-2026-10-26.csv",
-      "status": "success",
-      "rowCount": 1
-    },
-    {
-      "fileType": "daily-usage",
-      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-10-26.csv",
-      "status": "success",
-      "rowCount": 92
-    },
-    {
-      "fileType": "cp-code",
-      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-10-26.csv",
-      "status": "success",
-      "rowCount": 15
-    },
-    {
-      "fileType": "backfill-summary",
-      "sourceFile": null,
-      "status": "skipped",
-      "rowCount": 0
-    },
-    {
-      "fileType": "daily-summary",
       "sourceFile": "Daily Usage Komdigi-Summary-2026-10-27.csv",
       "status": "success",
       "rowCount": 1
@@ -1807,6 +1783,30 @@
     {
       "fileType": "cp-code",
       "sourceFile": "Daily Usage Komdigi-CP Code data-2026-10-30.csv",
+      "status": "success",
+      "rowCount": 15
+    },
+    {
+      "fileType": "backfill-summary",
+      "sourceFile": null,
+      "status": "skipped",
+      "rowCount": 0
+    },
+    {
+      "fileType": "daily-summary",
+      "sourceFile": "Daily Usage Komdigi-Summary-2026-10-31.csv",
+      "status": "success",
+      "rowCount": 1
+    },
+    {
+      "fileType": "daily-usage",
+      "sourceFile": "Daily Usage Komdigi-Daily usage-2026-10-31.csv",
+      "status": "success",
+      "rowCount": 120
+    },
+    {
+      "fileType": "cp-code",
+      "sourceFile": "Daily Usage Komdigi-CP Code data-2026-10-31.csv",
       "status": "success",
       "rowCount": 15
     },
